@@ -1,0 +1,10 @@
+CurrentState,KeyTyped,KeyCode,MouseEvent,ClickableName,MapDirection,NextState
+Splash,,,mouseReleased,,,Buddy
+Buddy,,,,Chicken,,Chicken
+Buddy,,,,Blob,,Blob
+Buddy,,,,Cat,,Cat
+Buddy,,,,Bunny,,Bunny
+Characters,,,,Start,,Start
+Chicken,,,,Next_Screen_chicken,,Chicken2
+Blob,,,,Print_Blob,,PrintBlob
+Cat,,,,Print_Cat,,PrintCat

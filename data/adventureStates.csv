@@ -1,0 +1,12 @@
+ID,StateName,ClassName,PNGFilename,CollisionFilename
+0,Splash,Splash,,
+1,Buddy,Buddy,,
+2,Characters,CharactersRoom,assets/background.png,
+3,Chicken,Chicken,,,
+4,Chicken2,Chicken2,,,
+5,Blob,Blobby,,,
+6,PrintBlob,PrintBlobby,,,
+7,Cat,Cat,,,
+8,PrintCat,PrintCat,,,
+9,Bunny,Bunny,,,
+10,PrintBunny,PrintBunny,,,
