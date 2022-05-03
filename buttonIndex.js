@@ -88,7 +88,7 @@ addBlobEyeIndex = function() {
         blob_eyeindex++;
     }
     if (blob_eyeindex > 5){
-        blob_bodyindex = 3;
+        blob_eyeindex = 3;
     }
 }
 subtractBlobEyeIndex = function() {
@@ -96,7 +96,7 @@ subtractBlobEyeIndex = function() {
         blob_eyeindex--;
     }
     if (blob_eyeindex < 3){
-        blob_bodyindex = 5;
+        blob_eyeindex = 5;
     }
 }
 
@@ -120,17 +120,17 @@ subtractCatEyeIndex = function() {
 addCatNoseIndex = function() {
     if (cat_noseindex <= 9){
         cat_noseindex++;
-    }
-    if (cat_noseindex > 9){
-        cat_bodyindex = 7;
+        if (cat_noseindex > 9){
+            cat_noseindex = 7;
+        }
     }
 }
 subtractCatNoseIndex = function() {
     if (cat_noseindex >= 7){
         cat_noseindex--;
-    }
-    if (cat_noseindex < 7){
-        cat_bodyindex = 9;
+        if (cat_noseindex < 7){
+            cat_noseindex = 9;
+        }
     }
 }
 addCatMouthIndex = function() {
@@ -138,7 +138,7 @@ addCatMouthIndex = function() {
         cat_mouthindex++;
     }
     if (cat_mouthindex > 12){
-        cat_bodyindex = 10;
+        cat_mouthindex = 10;
     }
 }
 subtractCatMouthIndex = function() {
@@ -146,6 +146,56 @@ subtractCatMouthIndex = function() {
         cat_mouthindex--;
     }
     if (cat_mouthindex < 10){
-        cat_bodyindex = 12;
+        cat_mouthindex = 12;
+    }
+}
+
+//BUNNY
+addBunnyEyeIndex = function() {
+    if (bunny_eyeindex <= 6){
+        bunny_eyeindex++;
+    }
+    if (bunny_eyeindex > 6){
+        bunny_eyeindex = 4;
+    }
+}
+subtractBunnyEyeIndex = function() {
+    if (bunny_eyeindex >= 4){
+        bunny_eyeindex--;
+    }
+    if (bunny_eyeindex < 4){
+        bunny_eyeindex = 6;
+    }
+}
+addBunnyNoseIndex = function() {
+    if (bunny_noseindex <= 9){
+        bunny_noseindex++;
+    }
+    if (bunny_noseindex > 9){
+        bunny_noseindex = 7;
+    }
+}
+subtractBunnyNoseIndex = function() {
+    if (bunny_noseindex >= 7){
+        bunny_noseindex--;
+    }
+    if (bunny_noseindex < 7){
+        bunny_noseindex = 9;
+    }
+}
+addBunnyMouthIndex = function() {
+    if (bunny_mouthindex <= 12){
+        bunny_mouthindex++;
+    }
+    if (bunny_mouthindex > 12){
+        bunny_mouthindex = 10;
+    }
+}
+subtractBunnyMouthIndex = function() {
+    if (bunny_mouthindex >= 10){
+        bunny_mouthindex--;
+    }
+    if (bunny_mouthindex < 10){
+        bunny_mouthindex = 12;
     }
 }

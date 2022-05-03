@@ -1,5 +1,5 @@
 /***********************************************************************************
-  Dreamcord
+  Make Your Cute
   by Sherry Lam
 
   Uses the p5.2DAdventure.js class 
@@ -14,10 +14,6 @@
 // adventure manager global  
 var adventureManager;
 
-// p5.play
-var playerSprite;
-var playerAnimation;
-
 // Clickables: the manager class
 var clickablesManager;    // the manager class
 var clickables;           // an array of clickable objects
@@ -26,34 +22,8 @@ var clickables;           // an array of clickable objects
 // indexes into the clickable array (constants) 
 const cl_startScenario = 0;
 
-// anger emojis
-var angerImage;   // anger emoji
-var maxAnger = 5;
-
-var faces = [];
-var e = 1;
-var logoImage;
-
-// character arrays
-var characterImages = [];   // array of character images, keep global for future expansion
-var characters = [];        // array of charactes
-
-//index
-var chracterIndex = 0;
-
-// characters
-const poor = 0;
-const rich = 1;
-const dreamcorps = 2;
-const government = 3;
-const naturalist = 4;
-
 // room indices - look at adventureManager
 const startScreen = 3;
-
-//fonts
-let headlineFont;
-let bodyFont;
 
 //chicken
 var chickenimg = [];
@@ -67,6 +37,10 @@ var blobAssets = ['blob_body1', 'blob_body2', 'blob_body3', 'blob_eye1', 'blob_e
 //cat
 var catimg = [];
 var catAssets = [];
+
+//bunny
+var bunnyimg = [];
+var bunnyAssets = [];
 
 //index
 var topindex = 0;
@@ -86,21 +60,23 @@ var cat_noseindex = 7;
 var cat_mouthindex = 10;
 var cat_stripe = 0;
 
+var bunny_eyeindex = 4;
+var bunny_noseindex = 7;
+var bunny_mouthindex = 10;
+
 var button;
+var button_hover;
+
+var animateX = 0;
+var animateY = 0;
 
 
 // Allocate Adventure Manager with states table and interaction tables
 function preload() {
-
-  headlineFont = loadFont('fonts/FogCityGothic-Wide.otf');
-  bodyFont = loadFont('fonts/FogCityGothic-Regular.otf');
-
-  // load all images
-  angerImage = loadImage("assets/anger_emoji.png");
-    faces[0] = loadImage('assets/angry.png');
-    faces[1] = loadImage('assets/neutral.png');
-    faces[2] = loadImage('assets/happy.png');
-  logoImage = loadImage("assets/logo.png");
+    
+    //button
+    button = loadImage('assets/button.svg');
+    button_hover = loadImage('assets/button_hover.svg');
     
     //chicken assets
     for (var i = 0; i < chickenAssets.length; i++) {
@@ -122,8 +98,14 @@ function preload() {
     for (var i = 1; i < 4; i++) {
         catimg[i+13] = loadImage('assets/cat_stripe-0' + i + '.png');
     }
-  
-  allocateCharacters();
+    
+    //bunny assets
+    for (var i = 1; i < 10; i++) {
+        bunnyimg[i-1] = loadImage('assets/bunny-0' + i + '.png');
+    }
+    for (var i = 10; i < 14; i++) {
+        bunnyimg[i-1] = loadImage('assets/bunny-' + i + '.png');
+    }
 
   clickablesManager = new ClickableManager('data/clickableLayout.csv');
   adventureManager = new AdventureManager('data/adventureStates.csv', 'data/interactionTable.csv', 'data/clickableLayout.csv');
@@ -131,9 +113,9 @@ function preload() {
 
 // Setup the adventure manager
 function setup() {
-  createCanvas(windowWidth, windowHeight);
-    canvas = createGraphics(200,200);
-    canvas.background(32);
+  createCanvas(displayWidth, displayHeight);
+    canvas = createGraphics(200, 200);
+    //canvas.background(32);
 
   // setup the clickables = this will allocate the array
   clickables = clickablesManager.setup();
@@ -166,13 +148,11 @@ function setup() {
 //  firebase.initializeApp(firebaseConfig);
 //    
 //    database = firebase.database();
+
+  rectMode(CENTER);
  
 
   fs = fullscreen();
-    
-//    button = createButton('click me');
-//  button.position(0, 0);
-//  button.mousePressed(reset_Canvas);
 }
 
 // Adventure manager handles it all!
@@ -180,20 +160,27 @@ function draw() {
     //background('#151515');
   // draws background rooms and handles movement from one to another
   adventureManager.draw();
-
-//   don't draw them on first few screens
-//  if( adventureManager.getStateName() === "Splash" ||
-//      adventureManager.getStateName() === "Instructions" ||
-//      adventureManager.getStateName() === "Characters" ||
-//      adventureManager.getStateName() === "Final") {
-//    ;
-//  }
-//  else {
-//    drawCharacters();
-//  }
   
   // draw the p5.clickables, in front of the mazes but behind the sprites 
   clickablesManager.draw();
+    
+    circle(animateX + 100, animateY + 100,100);
+    
+    if(animateY !== 500 && animateX == 0) {
+      animateY++;
+      animateX = 0;
+    }else if(animateY == 500 && animateX !== 500){
+      animateY = 500;
+      animateX++;
+    }else if(animateY !== 0 && animateX == 500) {
+      animateX = 500;
+      animateY--;
+    }else{
+      animateX--;
+      animateY = 0;
+    }
+
+    line(width/2,0,width/2,height);
     
 }
 
@@ -214,6 +201,10 @@ function keyPressed() {
 //        //save('myCanvas.pdf');
 //        makeScreenshot;
 //  }
+    
+    if(key === 'r') {
+        window.location.reload();
+    }
 
   // dispatch all keys to adventure manager
   adventureManager.keyPressed(key); 
@@ -222,12 +213,6 @@ function keyPressed() {
 function mouseReleased() {
   // dispatch all mouse events to adventure manager
   adventureManager.mouseReleased();
-}
-
-function drawCharacters() {
-  for( let i = 0; i < characters.length; i++ ) {
-    characters[i].draw();
-  }
 }
 
 function mousePressed() {
@@ -239,9 +224,11 @@ function mousePressed() {
 function setupClickables() {
   // All clickables to have same effects
   for( let i = 0; i < clickables.length; i++ ) {
-    clickables[i].resize(100, 50);
+    clickables[i].resize(150, 65);
     clickables[i].onHover = clickableButtonHover;
-    clickables[i].onOutside = clickableButtonOnOutside;    
+    clickables[i].onOutside = clickableButtonOnOutside;
+      //clickables[i].fitImage = true;
+      //clickables[i].imageScale = 2;
   }
 
   // we do specific callbacks for each clickable
@@ -251,7 +238,7 @@ function setupClickables() {
     clickables[3].onPress = clickableButtonPressed;
     clickables[4].onPress = clickableButtonPressed;
     
-    clickables[14].onPress = clickableButtonPressed;
+    clickables[14].onPress = save_Canvas;
     clickables[15].onPress = subtractCombIndex;
     clickables[16].onPress = addCombIndex;
     clickables[17].onPress = subtractTailIndex;
@@ -276,28 +263,42 @@ function setupClickables() {
     clickables[37].onPress = subtractCatMouthIndex;
     clickables[38].onPress = addCatMouthIndex;
     //clickables[39].onPress = catstripe;
-    //clickables[40].onPress = addCatMouthIndex;
+    //clickables[40].onPress = nocatstripe;
     clickables[41].onPress = clickableButtonPressed;
     clickables[42].onPress = printCanvas;
+    
+    clickables[43].onPress = save_Canvas;
+    clickables[44].onPress = subtractBunnyEyeIndex;
+    clickables[45].onPress = addBunnyEyeIndex;
+    clickables[46].onPress = subtractBunnyNoseIndex;
+    clickables[47].onPress = addBunnyNoseIndex;
+    clickables[48].onPress = subtractBunnyMouthIndex;
+    clickables[49].onPress = addBunnyMouthIndex;
+    clickables[50].onPress = clickableButtonPressed;
+    clickables[51].onPress = printCanvas;
 
 }
 
 // tint when mouse is over
 clickableButtonHover = function () {
-  this.color = "#00000090";
+    this.image = button_hover;
+  //this.color = "#00000090";
   this.noTint = false;
+    this.tint = "#00000090";
   this.strokeWeight = 0;
   //sthis.textColor = "#FFFFFF";
 }
 
 // color a light gray if off
 clickableButtonOnOutside = function () {
+    this.image = button;
   // backto our gray color
-  this.color = "#00000040";
+  //this.color = "#00000040";
+    this.noTint = false;
   this.strokeWeight = 0;
   this.textFont = "Roboto Slab";
   this.textSize = 30;
-  this.textColor = "#000000";
+  this.textColor = "#ffffff";
 }
 
 clickableButtonPressed = function() {
@@ -306,14 +307,16 @@ clickableButtonPressed = function() {
 
 function save_Canvas() {
     //save('img.png');
-    let c = get(width/4,height/2, 400, 400);
+    let c = get(width/2,height/2, 200, 200);
     canvas.image(c, 0, 0);
     save(canvas, "img.png");
 }
 printCanvas = function() {
     //this.visible = false;
-    //window.print();
-    setTimeout(window.print(), 100000);
+    let c = get(width/4,height/2, 200, 200);
+    canvas.image(c, 0, 0);
+    canvas.print();
+    //setTimeout(window.print(), 100000);
     //saveCanvas('img.pdf');
 }
 
@@ -321,87 +324,6 @@ function reset_Canvas(){
     window.location.reload();
 }
 
-
-//-- specific button callbacks: these will add or subtrack anger, then
-//-- pass the clickable pressed to the adventure manager, which changes the
-//-- state. A more elegant solution would be to use a table for all of these values
-
-clStart_A = function() {
-    characters[dreamcorps].changeEmotion(2);
-    adventureManager.clickablePressed(this.name);
-}
-
-
-clReset = function() {
-    characters[poor].changeEmotion(1);
-    characters[rich].changeEmotion(1);
-    characters[dreamcorps].changeEmotion(1);
-    characters[government].changeEmotion(1);
-    characters[naturalist].changeEmotion(1);
-    adventureManager.clickablePressed(this.name);
-}
-
-//Save_Blob = function() {
-//    save(canvas);
-//}
-
-//-------------- CHARACTERS -------------//
-function allocateCharacters() {
-  // load the images first
-  characterImages[poor] = loadImage("assets/poor.png");
-  characterImages[rich] = loadImage("assets/rich.png");
-  characterImages[dreamcorps] = loadImage("assets/dreamcorps.png");
-  characterImages[government] = loadImage("assets/government.png");
-  characterImages[naturalist] = loadImage("assets/naturalist.png");
-
-  for( let i = 0; i < characterImages.length; i++ ) {
-    characters[i] = new Character();
-    //characters[i].setup( characterImages[i], 50 + (400 * parseInt(i/2)), 120 + (i%2 * 120));
-    characters[i].setup( characterImages[i], 50, 225 + (100 * i));
-  }
-
-  // default anger is zero, set up some anger values
-    characters[poor].changeEmotion(1);
-    characters[rich].changeEmotion(1);
-    characters[dreamcorps].changeEmotion(1);
-    characters[government].changeEmotion(1);
-    characters[naturalist].changeEmotion(1);
-    
-}
-
-class Character {
-  constructor() {
-    this.image = null;
-    this.x = width/2;
-    this.y = width/2;
-  }
-
-  setup(img, x, y) {
-    this.image = img;
-    this.x = x;
-    this.y = y;
-    this.anger = 0;
-  }
-
-  draw() {
-    if( this.image ) {
-      push();
-      // draw the character icon
-      //imageMode(CENTER);
-      this.image.resize(0, 60);
-      image( this.image, this.x, this.y );
-
-      // draw emojis
-        image(faces[this.anger], this.x + 70, this.y +10 );
-
-      pop();
-    }
-  }
-    
-    changeEmotion(x) {
-        this.anger = x;
-    }
-}
 
 //-------------- ROOMS --------------//
 
@@ -448,6 +370,8 @@ class Splash extends PNGRoom {
       
       push();
 
+      background('pink');
+
       // title box
 //      fill(0,0,0,64);
 //      noStroke();
@@ -480,9 +404,9 @@ class Buddy extends PNGRoom {
       push();
 
       // title box
-      fill(0,0,0,64);
+      fill('#EFBDBD');
       noStroke();
-      rect(50, 50, 900, 100, 10);
+      rect(width/2, 100, width - 200, 100, 10);
 
       // title text
       fill(255);
@@ -490,7 +414,7 @@ class Buddy extends PNGRoom {
       textFont('Roboto Slab');
       textSize(60);
 
-      text("Select Your Buddy", 500 , 125);
+      text("Select Your Buddy", width/2 , 125);
       
       pop();
     }
@@ -511,7 +435,7 @@ class CharactersRoom extends PNGRoom {
       push();
 
       // title box
-      fill(0,0,0,64);
+      fill('#EFBDBD');
       noStroke();
       rect(50, 50, 900, 100, 10);
 
@@ -562,9 +486,9 @@ class Chicken extends PNGRoom {
       push();
 
       // title box
-      fill(0,0,0,64);
+      fill('#EFBDBD');
       noStroke();
-      rect(50, 50, 900, 100, 10);
+      rect(width/2, 100, 900, 100, 10);
 
       // title text
       fill(255);
@@ -572,7 +496,7 @@ class Chicken extends PNGRoom {
       textFont('Roboto Slab');
       textSize(60);
 
-      text("Customize your chicken buddy!", 500 , 125);
+      text("Customize your chicken buddy!", width/2 , 125);
 
       // body text
       fill(255);
@@ -606,7 +530,7 @@ class Chicken2 extends PNGRoom {
       push();
 
       // title box
-      fill(0,0,0,64);
+      fill('#EFBDBD');
       noStroke();
       rect(50, 50, 900, 100, 10);
 
@@ -655,9 +579,9 @@ class Blobby extends PNGRoom {
       push();
 
       // title box
-      fill(0,0,0,64);
+      fill('#EFBDBD');
       noStroke();
-      rect(50, 50, 900, 100, 10);
+      rect(width/2, 100, 900, 100, 10);
 
       // title text
       fill(255);
@@ -665,7 +589,7 @@ class Blobby extends PNGRoom {
       textFont('Roboto Slab');
       textSize(60);
 
-      text("Customize your blob buddy!", 500 , 125);
+      text("Customize your blob buddy!", width/2, 125);
 
       // body text
       fill(255);
@@ -739,9 +663,9 @@ class Cat extends PNGRoom {
       push();
 
       // title box
-      fill(0,0,0,64);
+      fill('#EFBDBD');
       noStroke();
-      rect(50, 50, 900, 100, 10);
+      rect(width/2, 100, 900, 100, 10);
 
       // title text
       fill(255);
@@ -749,7 +673,7 @@ class Cat extends PNGRoom {
       textFont('Roboto Slab');
       textSize(60);
 
-      text("Customize your cat buddy!", 500 , 125);
+      text("Customize your cat buddy!", width/2, 125);
 
       // body text
       fill(255);
@@ -815,6 +739,102 @@ class PrintCat extends PNGRoom {
         image(catimg[cat_eyeindex], 50, 65, 200, 200);
         image(catimg[cat_noseindex], 50, 75, 200, 200);
         image(catimg[cat_mouthindex], 50, 85, 200, 200);
+
+      pop();
+    }
+}
+
+class Bunny extends PNGRoom {
+  // Constructor gets calle with the new keyword, when upon constructor for the adventure manager in preload()
+  constructor() {
+    super();    // call super-class constructor to initialize variables in PNGRoom
+  }
+
+  // call the PNGRoom superclass's draw function to draw the background image
+  // and draw our instructions on top of this
+    draw() {
+      // this calls PNGRoom.draw()
+      super.draw();
+      
+      push();
+
+      // title box
+      fill('#EFBDBD');
+      noStroke();
+      rect(width/2, 100, 900, 100, 10);
+
+      // title text
+      fill(255);
+      textAlign(CENTER);
+      textFont('Roboto Slab');
+      textSize(60);
+
+      text("Customize your bunny buddy!", width/2, 125);
+
+      // body text
+      fill(255);
+      textAlign(LEFT);
+      textFont('Roboto Slab');
+      textSize(20);
+      textLeading(26);
+
+        //cat
+        image(bunnyimg[3], width/2 - 293, height/2-8, 200, 200);
+        image(bunnyimg[0], width/2 - 350, height/2-65, 200, 200);
+        image(bunnyimg[1], width/2 - 331, height/2-152, 200, 200);
+        image(bunnyimg[2], width/2 - 345, height/2-5, 200, 200);
+        
+        image(bunnyimg[bunny_eyeindex], width/2 - 350, height/2-65, 200, 200);
+        image(bunnyimg[bunny_noseindex], width/2 - 350, height/2-65, 200, 200);
+        image(bunnyimg[bunny_mouthindex], width/2 - 350, height/2-65, 200, 200);
+
+      pop();
+    }
+}
+
+class PrintBunny extends PNGRoom {
+  // Constructor gets calle with the new keyword, when upon constructor for the adventure manager in preload()
+  constructor() {
+    super();    // call super-class constructor to initialize variables in PNGRoom
+  }
+
+  // call the PNGRoom superclass's draw function to draw the background image
+  // and draw our instructions on top of this
+    draw() {
+      // this calls PNGRoom.draw()
+      super.draw();
+      
+      push();
+
+//      // title box
+//      fill(0,0,0,64);
+//      noStroke();
+//      rect(50, 50, 900, 100, 10);
+//
+//      // title text
+//      fill(255);
+//      textAlign(CENTER);
+//      textFont('Roboto Slab');
+//      textSize(60);
+//
+//      text("Customize your blob buddy!", 500 , 125);
+//
+//      // body text
+//      fill(255);
+//      textAlign(LEFT);
+//      textFont('Roboto Slab');
+//      textSize(20);
+//      textLeading(26);
+
+        //bunny
+        image(bunnyimg[1], 100, 115, 200, 200);
+        image(bunnyimg[0], 50, 50, 200, 200);
+        image(bunnyimg[2], 180, 65, 200, 200);
+        image(bunnyimg[3], 102, 160, 200, 200);
+        
+        image(bunnyimg[bunny_eyeindex], 50, 65, 200, 200);
+        image(bunnyimg[bunny_noseindex], 50, 75, 200, 200);
+        image(bunnyimg[bunny_mouthindex], 50, 85, 200, 200);
 
       pop();
     }
