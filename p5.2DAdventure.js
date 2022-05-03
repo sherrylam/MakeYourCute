@@ -11,7 +11,7 @@
 class AdventureManager {
     // Clickable layout table is an OPTIONAL parameter
     constructor(statesFilename, interactionFilename, clickableLayoutFilename = null) {
-        this.backgroundColor = color("gray");
+        this.backgroundColor = color("white");
         this.currentState = 0;
         this.currentStateName = "";
         this.hasValidStates = false;

@@ -25,6 +25,9 @@ const cl_startScenario = 0;
 // room indices - look at adventureManager
 const startScreen = 3;
 
+var titleAnimation = 0;
+var speed = 0.5;
+
 //chicken
 var chickenimg = [];
 var chickenAssets = ['chicken_body', 'chicken_tail1', 'chicken_tail2', 'chicken_tail3', 'chicken_wing1', 'chicken_wing2', 'chicken_wing3',
@@ -164,23 +167,23 @@ function draw() {
   // draw the p5.clickables, in front of the mazes but behind the sprites 
   clickablesManager.draw();
     
-    circle(animateX + 100, animateY + 100,100);
-    
-    if(animateY !== 500 && animateX == 0) {
-      animateY++;
-      animateX = 0;
-    }else if(animateY == 500 && animateX !== 500){
-      animateY = 500;
-      animateX++;
-    }else if(animateY !== 0 && animateX == 500) {
-      animateX = 500;
-      animateY--;
-    }else{
-      animateX--;
-      animateY = 0;
-    }
+//    circle(animateX + 100, animateY + 100,100);
+//    
+//    if(animateY !== 500 && animateX == 0) {
+//      animateY++;
+//      animateX = 0;
+//    }else if(animateY == 500 && animateX !== 500){
+//      animateY = 500;
+//      animateX++;
+//    }else if(animateY !== 0 && animateX == 500) {
+//      animateX = 500;
+//      animateY--;
+//    }else{
+//      animateX--;
+//      animateY = 0;
+//    }
 
-    line(width/2,0,width/2,height);
+    //line(width/2,0,width/2,height);
     
 }
 
@@ -296,7 +299,7 @@ clickableButtonOnOutside = function () {
   //this.color = "#00000040";
     this.noTint = false;
   this.strokeWeight = 0;
-  this.textFont = "Roboto Slab";
+  this.textFont = "Nunito";
   this.textSize = 30;
   this.textColor = "#ffffff";
 }
@@ -378,14 +381,20 @@ class Splash extends PNGRoom {
 //      rect(200, 50, 750, 100, 10);
 
       // title text
-      //fill(255);
+      fill(255);
       textAlign(CENTER);
-      textFont('Roboto Slab');
+      textFont('Nunito');
       textSize(60);
 
-      text('Make Your Cute', width/2 , height/2);
+      text('Make Your Cute', width/2 , height/2 + titleAnimation);
+        titleAnimation+=speed;
+        
+        if(titleAnimation >= 20 || titleAnimation <= -20){
+            speed = -speed;
+        }
       
       pop();
+        
     }
 }
 
@@ -411,7 +420,7 @@ class Buddy extends PNGRoom {
       // title text
       fill(255);
       textAlign(CENTER);
-      textFont('Roboto Slab');
+      textFont('Nunito');
       textSize(60);
 
       text("Select Your Buddy", width/2 , 125);
@@ -442,7 +451,7 @@ class CharactersRoom extends PNGRoom {
       // title text
       fill(255);
       textAlign(CENTER);
-      textFont('Roboto Slab');
+      textFont('Nunito');
       textSize(60);
 
       text("Characters", 500 , 125);
@@ -450,7 +459,7 @@ class CharactersRoom extends PNGRoom {
       // body text
       fill(255);
       textAlign(LEFT);
-      textFont('Roboto Slab');
+      textFont('Nunito');
       textSize(20);
       textLeading(26);
 
@@ -493,7 +502,7 @@ class Chicken extends PNGRoom {
       // title text
       fill(255);
       textAlign(CENTER);
-      textFont('Roboto Slab');
+      textFont('Nunito');
       textSize(60);
 
       text("Customize your chicken buddy!", width/2 , 125);
@@ -501,7 +510,7 @@ class Chicken extends PNGRoom {
       // body text
       fill(255);
       textAlign(LEFT);
-      textFont('Roboto Slab');
+      textFont('Nunito');
       textSize(20);
       textLeading(26);
 
@@ -537,7 +546,7 @@ class Chicken2 extends PNGRoom {
       // title text
       fill(255);
       textAlign(CENTER);
-      textFont('Roboto Slab');
+      textFont('Nunito');
       textSize(60);
 
       text("Customize your chicken buddy2!", 500 , 125);
@@ -545,7 +554,7 @@ class Chicken2 extends PNGRoom {
       // body text
       fill(255);
       textAlign(LEFT);
-      textFont('Roboto Slab');
+      textFont('Nunito');
       textSize(20);
       textLeading(26);
 
@@ -586,7 +595,7 @@ class Blobby extends PNGRoom {
       // title text
       fill(255);
       textAlign(CENTER);
-      textFont('Roboto Slab');
+      textFont('Nunito');
       textSize(60);
 
       text("Customize your blob buddy!", width/2, 125);
@@ -594,7 +603,7 @@ class Blobby extends PNGRoom {
       // body text
       fill(255);
       textAlign(LEFT);
-      textFont('Roboto Slab');
+      textFont('Nunito');
       textSize(20);
       textLeading(26);
 
@@ -628,7 +637,7 @@ class PrintBlobby extends PNGRoom {
 //      // title text
 //      fill(255);
 //      textAlign(CENTER);
-//      textFont('Roboto Slab');
+//      textFont('Nunito');
 //      textSize(60);
 //
 //      text("Customize your blob buddy!", 500 , 125);
@@ -636,7 +645,7 @@ class PrintBlobby extends PNGRoom {
 //      // body text
 //      fill(255);
 //      textAlign(LEFT);
-//      textFont('Roboto Slab');
+//      textFont('Nunito');
 //      textSize(20);
 //      textLeading(26);
 
@@ -670,7 +679,7 @@ class Cat extends PNGRoom {
       // title text
       fill(255);
       textAlign(CENTER);
-      textFont('Roboto Slab');
+      textFont('Nunito');
       textSize(60);
 
       text("Customize your cat buddy!", width/2, 125);
@@ -678,7 +687,7 @@ class Cat extends PNGRoom {
       // body text
       fill(255);
       textAlign(LEFT);
-      textFont('Roboto Slab');
+      textFont('Nunito');
       textSize(20);
       textLeading(26);
 
@@ -718,7 +727,7 @@ class PrintCat extends PNGRoom {
 //      // title text
 //      fill(255);
 //      textAlign(CENTER);
-//      textFont('Roboto Slab');
+//      textFont('Nunito');
 //      textSize(60);
 //
 //      text("Customize your blob buddy!", 500 , 125);
@@ -726,7 +735,7 @@ class PrintCat extends PNGRoom {
 //      // body text
 //      fill(255);
 //      textAlign(LEFT);
-//      textFont('Roboto Slab');
+//      textFont('Nunito');
 //      textSize(20);
 //      textLeading(26);
 
@@ -766,7 +775,7 @@ class Bunny extends PNGRoom {
       // title text
       fill(255);
       textAlign(CENTER);
-      textFont('Roboto Slab');
+      textFont('Nunito');
       textSize(60);
 
       text("Customize your bunny buddy!", width/2, 125);
@@ -774,7 +783,7 @@ class Bunny extends PNGRoom {
       // body text
       fill(255);
       textAlign(LEFT);
-      textFont('Roboto Slab');
+      textFont('Nunito');
       textSize(20);
       textLeading(26);
 
@@ -814,7 +823,7 @@ class PrintBunny extends PNGRoom {
 //      // title text
 //      fill(255);
 //      textAlign(CENTER);
-//      textFont('Roboto Slab');
+//      textFont('Nunito');
 //      textSize(60);
 //
 //      text("Customize your blob buddy!", 500 , 125);
@@ -822,7 +831,7 @@ class PrintBunny extends PNGRoom {
 //      // body text
 //      fill(255);
 //      textAlign(LEFT);
-//      textFont('Roboto Slab');
+//      textFont('Nunito');
 //      textSize(20);
 //      textLeading(26);
 
