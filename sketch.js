@@ -122,7 +122,7 @@ function preload() {
 // Setup the adventure manager
 function setup() {
   createCanvas(displayWidth, displayHeight);
-    canvas = createGraphics(200, 200);
+    canvas = createGraphics(300, 300);
     //canvas.background(32);
 
   // setup the clickables = this will allocate the array
@@ -191,6 +191,7 @@ function draw() {
 //    borderAnimation(25,75);
 
     //line(width/2,0,width/2,height);
+    //rect(width/2 - 200, height/2, 300,300);
     
 }
 
@@ -338,7 +339,7 @@ clickableButtonPressed = function() {
 
 function save_Canvas() {
     //save('img.png');
-    let c = get(width/2,height/2, 200, 200);
+    let c = get(width/2-350,height/2-150, 300, 300);
     canvas.image(c, 0, 0);
     save(canvas, "img.png");
 }
