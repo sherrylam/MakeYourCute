@@ -70,6 +70,8 @@ var bunny_mouthindex = 10;
 var button;
 var button_hover;
 
+var flower;
+
 var animateX = 0;
 var animateY = 0;
 
@@ -80,6 +82,9 @@ function preload() {
     //button
     button = loadImage('assets/button.svg');
     button_hover = loadImage('assets/button_hover.svg');
+    
+    //border
+    flower = loadImage('assets/flower.png');
     
     //chicken assets
     for (var i = 0; i < chickenAssets.length; i++) {
@@ -182,9 +187,32 @@ function draw() {
 //      animateX--;
 //      animateY = 0;
 //    }
+//    borderAnimation(25,25);
+//    borderAnimation(25,75);
 
     //line(width/2,0,width/2,height);
     
+}
+
+function borderAnimation(x, y){
+//    strokeWeight(0);
+//    circle(animateX + x, animateY + y,50);
+    
+    image(flower, animateX + x, animateY + y, 50, 50);
+    
+    if(animateY !== displayHeight - 2*y && animateX == 0) {
+      animateY++;
+      animateX = 0;
+    }else if(animateY == displayHeight - 2*y && animateX !== displayWidth - 2*x){
+      animateY = displayHeight - 2*y;
+      animateX++;
+    }else if(animateY !== 0 && animateX == displayWidth - 2*x) {
+      animateX = displayWidth - 2*x;
+      animateY--;
+    }else{
+      animateX--;
+      animateY = 0;
+    }
 }
 
 //function windowResized() {
@@ -300,7 +328,7 @@ clickableButtonOnOutside = function () {
     this.noTint = false;
   this.strokeWeight = 0;
   this.textFont = "Nunito";
-  this.textSize = 30;
+  this.textSize = 25;
   this.textColor = "#ffffff";
 }
 

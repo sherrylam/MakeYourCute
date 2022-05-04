@@ -38,8 +38,8 @@ ID,Name,State,PNGFilename,Text,x,y,visible
 36,Next_Button_Cat_nose,Cat,,-->,width/2+250,height/2-100,yes
 37,Previous_Button_Cat_mouth,Cat,,<--,width/2+50,height/2,yes
 38,Next_Button_Cat_mouth,Cat,,-->,width/2+250,height/2,yes
-39,No_Stripe_Cat_mouth,Cat,,No Stripes,width/2+50,height/2-100,yes
-40,Stripe_Button_Cat_mouth,Cat,,Stripes,width/2+250,height/2-100,yes
+39,No_Stripe_Cat_mouth,Cat,,No Stripes,width/2+50,height/2+100,yes
+40,Stripe_Button_Cat_mouth,Cat,,Stripes,width/2+250,height/2+100,yes
 41,Print_Cat,Cat,,Print Buddy,width/2+250,height/2+200,yes
 42,Print_Cat,PrintCat,,Print,width/2+250,height/2+200,yes
 43,Save_Bunny,Bunny,,Save,width/2+50,height/2+200,yes
