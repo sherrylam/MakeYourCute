@@ -191,7 +191,8 @@ function draw() {
 //    borderAnimation(25,75);
 
     //line(width/2,0,width/2,height);
-    //rect(width/2 - 200, height/2, 300,300);
+    noFill();
+    rect(width/2 - 200, height/2, 300,300);
     
 }
 
@@ -544,11 +545,11 @@ class Chicken extends PNGRoom {
       textLeading(26);
 
         //chicken
-        image(chickenimg[feetindex], width/2 - 300, 685, 200, 200);
-        image(chickenimg[0], width/2 - 300, 500, 200, 200);
-        image(chickenimg[tailindex], width/2 - 100, 500, 200, 200);
-        image(chickenimg[combindex], width/2 - 280, 405, 200, 200);
-        image(chickenimg[wingindex], width/2 - 225, 520, 200, 200);
+        image(chickenimg[feetindex], width/2 - 350, height/2 +85, 200, 200);
+        image(chickenimg[0], width/2 - 350, height/2 - 100, 200, 200);
+        image(chickenimg[tailindex], width/2 - 150, height/2 - 100, 200, 200);
+        image(chickenimg[combindex], width/2 - 330, height/2 -195, 200, 200);
+        image(chickenimg[wingindex], width/2 - 275, height/2 - 80, 200, 200);
 
       pop();
     }
