@@ -10,3 +10,5 @@ ID,StateName,ClassName,PNGFilename,CollisionFilename
 8,PrintCat,PrintCat,,,
 9,Bunny,Bunny,,,
 10,PrintBunny,PrintBunny,,,
+11,Dog,Dog,,,
+12,Human,Human,,,

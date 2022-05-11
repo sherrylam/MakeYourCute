@@ -4,6 +4,11 @@ Buddy,,,,Chicken,,Chicken
 Buddy,,,,Blob,,Blob
 Buddy,,,,Cat,,Cat
 Buddy,,,,Bunny,,Bunny
-Chicken,,,,Next_Screen_chicken,,Chicken2
-Blob,,,,Print_Blob,,PrintBlob
-Cat,,,,Print_Cat,,PrintCat
+Buddy,,,,Dog,,Dog
+Buddy,,,,Human,,Human
+Chicken,,,,Back_chicken,,Buddy
+Blob,,,,Back_blob,,Buddy
+Cat,,,,Back_Cat,,Buddy
+Bunny,,,,Back_Bunny,,Buddy
+Dog,,,,Back_Dog,,Buddy
+Human,,,,Back_Human,,Buddy

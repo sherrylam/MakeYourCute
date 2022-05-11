@@ -2,9 +2,9 @@ ID,Name,State,PNGFilename,Text,x,y,visible
 0,Chicken,Buddy,,Chicken,width/2-75,200,yes
 1,Bunny,Buddy,,Bunny,width/2-75,300,yes
 2,Cat,Buddy,,Cat,width/2-75,400,yes
-3,Human,Buddy,,Human,width/2-75,500,yes
+3,Human,Buddy,,Human,width/2-75,600,yes
 4,Blob,Buddy,,Blob,width/2-75,600,yes
-5,,,,,,,
+5,Dog,Buddy,,Dog,width/2-75,500,yes
 6,,,,,,,
 7,,,,,,,
 8,,,,,,,
@@ -13,41 +13,59 @@ ID,Name,State,PNGFilename,Text,x,y,visible
 11,Previous_Button,Characters,,<--,width/2+50,height/2,yes
 12,Next_Button,Characters,,-->,width/2+250,height/2,yes
 13,,,,,,,
-14,Save_chicken,Chicken,,Save,width/2+50,height/2+200,yes
+14,Save_chicken,Chicken,,Save & Print,width/2-275,height/2+200,yes
 15,Previous_Button_chicken_comb,Chicken,,<--,width/2+50,height/2-200,yes
 16,Next_Button_chicken_comb,Chicken,,-->,width/2+250,height/2-200,yes
 17,Previous_Button_chicken_tail,Chicken,,<--,width/2+50,height/2-100,yes
 18,Next_Button_chicken_tail,Chicken,,-->,width/2+250,height/2-100,yes
 19,Previous_Button_chicken_feet,Chicken,,<--,width/2+50,height/2,yes
 20,Next_Button_chicken_feet,Chicken,,-->,width/2+250,height/2,yes
-21,Print_chicken,Chicken,,Print,width/2+250,height/2+200,yes
-22,,,,,,,
-23,,,,,,,
+21,Previous_Button_chicken_wing,Chicken,,<--,width/2+50,height/2+100,yes
+22,Next_Button_chicken_wing,Chicken,,-->,width/2+250,height/2+100,yes
+23,Back_chicken,Chicken,,Go Back,width/2-275,height/2-200,yes
 24,,,,,,,
-25,Save_Blob,Blob,,Save,width/2+50,height/2+200,yes
+25,Save_Blob,Blob,,Save & Print,width/2-275,height/2+200,yes
 26,Previous_Button_blob_body,Blob,,<--,width/2+50,height/2-200,yes
 27,Next_Button_blob_body,Blob,,-->,width/2+250,height/2-200,yes
 28,Previous_Button_blob_eye,Blob,,<--,width/2+50,height/2-100,yes
 29,Next_Button_blob_eye,Blob,,-->,width/2+250,height/2-100,yes
-30,Print_Blob,Blob,,Print Buddy,width/2+250,height/2+200,yes
-31,Print_Blob,PrintBlob,,Print,width/2+250,height/2+200,yes
-32,Save_Cat,Cat,,Save,width/2+50,height/2+200,yes
-33,Previous_Button_Cat_eye,Cat,,<--,width/2+50,height/2-200,yes
-34,Next_Button_Cat_eye,Cat,,-->,width/2+250,height/2-200,yes
-35,Previous_Button_Cat_nose,Cat,,<--,width/2+50,height/2-100,yes
-36,Next_Button_Cat_nose,Cat,,-->,width/2+250,height/2-100,yes
-37,Previous_Button_Cat_mouth,Cat,,<--,width/2+50,height/2,yes
-38,Next_Button_Cat_mouth,Cat,,-->,width/2+250,height/2,yes
-39,No_Stripe_Cat_mouth,Cat,,No Stripes,width/2+50,height/2+100,yes
-40,Stripe_Button_Cat_mouth,Cat,,Stripes,width/2+250,height/2+100,yes
-41,Print_Cat,Cat,,Print Buddy,width/2+250,height/2+200,yes
-42,Print_Cat,PrintCat,,Print,width/2+250,height/2+200,yes
-43,Save_Bunny,Bunny,,Save,width/2+50,height/2+200,yes
-44,Previous_Button_Bunny_eye,Bunny,,<--,width/2+50,height/2-200,yes
-45,Next_Button_Bunny_eye,Bunny,,-->,width/2+250,height/2-200,yes
-46,Previous_Button_Bunny_nose,Bunny,,<--,width/2+50,height/2-100,yes
-47,Next_Button_Bunny_nose,Bunny,,-->,width/2+250,height/2-100,yes
-48,Previous_Button_Bunny_mouth,Bunny,,<--,width/2+50,height/2,yes
-49,Next_Button_Bunny_mouth,Bunny,,-->,width/2+250,height/2,yes
-50,Print_Bunny,Bunny,,Print Buddy,width/2+250,height/2+200,yes
-51,Print_Bunny,PrintBunny,,Print,width/2+250,height/2+200,yes
+30,Back_blob,Blob,,Go Back,width/2-275,height/2-200,yes
+31,,,,,,,
+32,Save_Cat,Cat,,Save & Print,width/2-275,height/2+200,yes
+33,Previous_Button_Cat_ear,Cat,,<--,width/2+50,height/2-200,yes
+34,Next_Button_Cat_ear,Cat,,-->,width/2+250,height/2-200,yes
+35,Previous_Button_Cat_tail,Cat,,<--,width/2+50,height/2-100,yes
+36,Next_Button_Cat_tail,Cat,,-->,width/2+250,height/2-100,yes
+37,Previous_Button_Cat_eye,Cat,,<--,width/2+50,height/2,yes
+38,Next_Button_Cat_eye,Cat,,-->,width/2+250,height/2,yes
+39,Previous_Button_Cat_nose,Cat,,<--,width/2+50,height/2+100,yes
+40,Next_Button_Cat_nose,Cat,,-->,width/2+250,height/2+100,yes
+41,Previous_Button_Cat_mouth,Cat,,<--,width/2+50,height/2+200,yes
+42,Next_Button_Cat_mouth,Cat,,-->,width/2+250,height/2+200,yes
+43,No_Stripe_Cat_mouth,Cat,,No Stripes,width/2+50,height/2-10000,yes
+44,Stripe_Button_Cat_mouth,Cat,,Stripes,width/2+250,height/2-10000,yes
+45,Back_Cat,Cat,,Go Back,width/2-275,height/2-200,yes
+46,,,,,,,
+47,Save_Bunny,Bunny,,Save & Print,width/2-275,height/2+200,yes
+48,Previous_Button_Bunny_ear,Bunny,,<--,width/2+50,height/2-200,yes
+49,Next_Button_Bunny_ear,Bunny,,-->,width/2+250,height/2-200,yes
+50,Previous_Button_Bunny_eye,Bunny,,<--,width/2+50,height/2-100,yes
+51,Next_Button_Bunny_eye,Bunny,,-->,width/2+250,height/2-100,yes
+52,Previous_Button_Bunny_nose,Bunny,,<--,width/2+50,height/2,yes
+53,Next_Button_Bunny_nose,Bunny,,-->,width/2+250,height/2,yes
+54,Previous_Button_Bunny_mouth,Bunny,,<--,width/2+50,height/2+100,yes
+55,Next_Button_Bunny_mouth,Bunny,,-->,width/2+250,height/2+100,yes
+56,Back_Bunny,Bunny,,Go Back,width/2-275,height/2-200,yes
+57,,,,,,,
+58,Save_Dog,Dog,,Save & Print,width/2-275,height/2+200,yes
+59,Previous_Button_Dog_ear,Dog,,<--,width/2+50,height/2-200,yes
+60,Next_Button_Dog_ear,Dog,,-->,width/2+250,height/2-200,yes
+61,Previous_Button_Dog_tail,Dog,,<--,width/2+50,height/2-100,yes
+62,Next_Button_Dog_tail,Dog,,-->,width/2+250,height/2-100,yes
+63,Previous_Button_Dog_eye,Dog,,<--,width/2+50,height/2,yes
+64,Next_Button_Dog_eye,Dog,,-->,width/2+250,height/2,yes
+65,Previous_Button_Dog_nose,Dog,,<--,width/2+50,height/2+100,yes
+66,Next_Button_Dog_nose,Dog,,-->,width/2+250,height/2+100,yes
+67,Previous_Button_Dog_mouth,Dog,,<--,width/2+50,height/2+200,yes
+68,Next_Button_Dog_mouth,Dog,,-->,width/2+250,height/2+200,yes
+69,Back_Dog,Dog,,Go Back,width/2-275,height/2-200,yes

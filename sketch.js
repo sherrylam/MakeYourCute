@@ -30,8 +30,7 @@ var speed = 0.5;
 
 //chicken
 var chickenimg = [];
-var chickenAssets = ['chicken_body', 'chicken_tail1', 'chicken_tail2', 'chicken_tail3', 'chicken_wing1', 'chicken_wing2', 'chicken_wing3',
-                    'chicken_feet1', 'chicken_feet2','chicken_feet3', 'chicken_comb1', 'chicken_comb2', 'chicken_comb3'];
+var chickenAssets = [];
 
 //blob
 var blobimg = [];
@@ -45,6 +44,10 @@ var catAssets = [];
 var bunnyimg = [];
 var bunnyAssets = [];
 
+//dog
+var dogimg  = [];
+var dogAssets =  [];
+
 //index
 var topindex = 0;
 var midindex = 0;
@@ -56,16 +59,25 @@ var feetindex = 7;
 var wingindex = 4;
 
 var blob_bodyindex = 0;
-var blob_eyeindex = 3;
+var blob_eyeindex = 12;
 
-var cat_eyeindex = 4;
-var cat_noseindex = 7;
-var cat_mouthindex = 10;
-var cat_stripe = 0;
+var cat_earindex = 1;
+var cat_tailindex = 7;
+var cat_eyeindex = 13;
+var cat_noseindex = 19;
+var cat_mouthindex = 25;
+var cat_stripe = 30;
 
-var bunny_eyeindex = 4;
-var bunny_noseindex = 7;
-var bunny_mouthindex = 10;
+var bunny_earindex = 1
+var bunny_eyeindex = 7;
+var bunny_noseindex = 13;
+var bunny_mouthindex = 19;
+
+var dog_earindex = 1;
+var dog_tailindex = 7;
+var dog_eyeindex = 13;
+var dog_noseindex = 19;
+var dog_mouthindex = 25;
 
 var button;
 var button_hover;
@@ -87,33 +99,33 @@ function preload() {
     flower = loadImage('assets/flower.png');
     
     //chicken assets
-    for (var i = 0; i < chickenAssets.length; i++) {
-        chickenimg[i] = loadImage('assets/' + chickenAssets[i] + '.png');
+    for (var i = 1; i < 14; i++) {
+        chickenimg[i-1] = loadImage('assets/chicken-' + i + '.png');
     }
     
     //blob assets
-    for (var i = 0; i < blobAssets.length; i++) {
-        blobimg[i] = loadImage('assets/' + blobAssets[i] + '.png');
+    for (var i = 1; i < 19; i++) {
+        blobimg[i-1] = loadImage('assets/blob-' + i + '.png');
     }
     
     //cat assets
-    for (var i = 1; i < 10; i++) {
-        catimg[i-1] = loadImage('assets/cat-0' + i + '.png');
-    }
-    for (var i = 10; i < 14; i++) {
+    for (var i = 1; i < 32; i++) {
         catimg[i-1] = loadImage('assets/cat-' + i + '.png');
     }
-    for (var i = 1; i < 4; i++) {
-        catimg[i+13] = loadImage('assets/cat_stripe-0' + i + '.png');
+    for (var i = 1; i < 3; i++) {
+        catimg[i+30] = loadImage('assets/cat_stripe-0' + i + '.png');
     }
     
     //bunny assets
-    for (var i = 1; i < 10; i++) {
-        bunnyimg[i-1] = loadImage('assets/bunny-0' + i + '.png');
-    }
-    for (var i = 10; i < 14; i++) {
+    for (var i = 1; i < 26; i++) {
         bunnyimg[i-1] = loadImage('assets/bunny-' + i + '.png');
     }
+    
+    //dog assets
+    for (var i = 1; i < 32; i++) {
+        dogimg[i-1] = loadImage('assets/dog-' + i + '.png');
+    }
+    
 
   clickablesManager = new ClickableManager('data/clickableLayout.csv');
   adventureManager = new AdventureManager('data/adventureStates.csv', 'data/interactionTable.csv', 'data/clickableLayout.csv');
@@ -122,7 +134,7 @@ function preload() {
 // Setup the adventure manager
 function setup() {
   createCanvas(displayWidth, displayHeight);
-    canvas = createGraphics(300, 300);
+    canvas = createGraphics(200, 200);
     //canvas.background(32);
 
   // setup the clickables = this will allocate the array
@@ -134,6 +146,7 @@ function setup() {
     resetButton.onOutside = clickableButtonOnOutside;
     resetButton.onPress = reset_Canvas;
     resetButton.resize(150, 65);
+    resetButton.locate(width/2-275,height/2-300);
     resetButton.text = "Reset";
 
   // this is optional but will manage turning visibility of buttons on/off
@@ -180,7 +193,14 @@ function draw() {
   // draw the p5.clickables, in front of the mazes but behind the sprites 
   clickablesManager.draw();
     
+    if( adventureManager.getStateName() === "Splash" ||
+      adventureManager.getStateName() === "Buddy") {
+    ;
+  }
+  else {
     resetButton.draw();
+  }
+    
     
 //    circle(animateX + 100, animateY + 100,100);
 //    
@@ -201,8 +221,9 @@ function draw() {
 //    borderAnimation(25,75);
 
     //line(width/2,0,width/2,height);
-    noFill();
-    rect(width/2 - 200, height/2, 300,300);
+//    noFill();
+//    rect(width/2 - 200, height/2, 200,200);
+//    ellipse(width/2 - 200, height/2, 200,200);
     
 }
 
@@ -280,6 +301,7 @@ function setupClickables() {
     clickables[2].onPress = clickableButtonPressed;
     clickables[3].onPress = clickableButtonPressed;
     clickables[4].onPress = clickableButtonPressed;
+    clickables[5].onPress = clickableButtonPressed;
     
     clickables[14].onPress = save_Canvas;
     clickables[15].onPress = subtractCombIndex;
@@ -288,7 +310,9 @@ function setupClickables() {
     clickables[18].onPress = addTailIndex;
     clickables[19].onPress = subtractFeetIndex;
     clickables[20].onPress = addFeetIndex;
-    clickables[21].onPress = printCanvas;
+    clickables[21].onPress = addWingIndex;
+    clickables[22].onPress = subtractWingIndex;
+    clickables[23].onPress = clickableButtonPressed;
     
     clickables[25].onPress = save_Canvas;
     clickables[26].onPress = subtractBlobIndex;
@@ -296,29 +320,45 @@ function setupClickables() {
     clickables[28].onPress = subtractBlobEyeIndex;
     clickables[29].onPress = addBlobEyeIndex;
     clickables[30].onPress = clickableButtonPressed;
-    clickables[31].onPress = printCanvas;
     
     clickables[32].onPress = save_Canvas;
-    clickables[33].onPress = subtractCatEyeIndex;
-    clickables[34].onPress = addCatEyeIndex;
-    clickables[35].onPress = subtractCatNoseIndex;
-    clickables[36].onPress = addCatNoseIndex;
-    clickables[37].onPress = subtractCatMouthIndex;
-    clickables[38].onPress = addCatMouthIndex;
-    //clickables[39].onPress = catstripe;
-    //clickables[40].onPress = nocatstripe;
-    clickables[41].onPress = clickableButtonPressed;
-    clickables[42].onPress = printCanvas;
+    clickables[33].onPress = subtractCatEarIndex;
+    clickables[34].onPress = addCatEarIndex;
+    clickables[35].onPress = subtractCatTailIndex;
+    clickables[36].onPress = addCatTailIndex;
+    clickables[37].onPress = subtractCatEyeIndex;
+    clickables[38].onPress = addCatEyeIndex;
+    clickables[39].onPress = subtractCatNoseIndex;
+    clickables[40].onPress = addCatNoseIndex;
+    clickables[41].onPress = subtractCatMouthIndex;
+    clickables[42].onPress = addCatMouthIndex;
+//    clickables[43].onPress = catstripe;
+//    clickables[44].onPress = nocatstripe;
+    clickables[45].onPress = clickableButtonPressed;
     
-    clickables[43].onPress = save_Canvas;
-    clickables[44].onPress = subtractBunnyEyeIndex;
-    clickables[45].onPress = addBunnyEyeIndex;
-    clickables[46].onPress = subtractBunnyNoseIndex;
-    clickables[47].onPress = addBunnyNoseIndex;
-    clickables[48].onPress = subtractBunnyMouthIndex;
-    clickables[49].onPress = addBunnyMouthIndex;
-    clickables[50].onPress = clickableButtonPressed;
-    clickables[51].onPress = printCanvas;
+    clickables[47].onPress = save_Canvas;
+    clickables[48].onPress = subtractBunnyEarIndex;
+    clickables[49].onPress = addBunnyEarIndex;
+    clickables[50].onPress = subtractBunnyEyeIndex;
+    clickables[51].onPress = addBunnyEyeIndex;
+    clickables[52].onPress = subtractBunnyNoseIndex;
+    clickables[53].onPress = addBunnyNoseIndex;
+    clickables[54].onPress = subtractBunnyMouthIndex;
+    clickables[55].onPress = addBunnyMouthIndex;
+    clickables[56].onPress = clickableButtonPressed;;
+    
+    clickables[58].onPress = save_Canvas;
+    clickables[59].onPress = subtractDogEarIndex;
+    clickables[60].onPress = addDogEarIndex;
+    clickables[61].onPress = subtractDogTailIndex;
+    clickables[62].onPress = addDogTailIndex;
+    clickables[63].onPress = subtractDogEyeIndex;
+    clickables[64].onPress = addDogEyeIndex;
+    clickables[65].onPress = subtractDogNoseIndex;
+    clickables[66].onPress = addDogNoseIndex;
+    clickables[67].onPress = subtractDogMouthIndex;
+    clickables[68].onPress = addDogMouthIndex;
+    clickables[69].onPress = clickableButtonPressed;;
 
 }
 
@@ -350,9 +390,10 @@ clickableButtonPressed = function() {
 
 function save_Canvas() {
     //save('img.png');
-    let c = get(width/2-350,height/2-150, 300, 300);
+    let c = get(width/2-300,height/2-100, 300, 300);
     canvas.image(c, 0, 0);
     save(canvas, "img.png");
+    canvas.print();
 }
 printCanvas = function() {
     //this.visible = false;
@@ -413,7 +454,7 @@ class Splash extends PNGRoom {
       
       push();
 
-      background('pink');
+      background('#EFBDBD');
 
       // title box
 //      fill(0,0,0,64);
@@ -555,11 +596,11 @@ class Chicken extends PNGRoom {
       textLeading(26);
 
         //chicken
-        image(chickenimg[feetindex], width/2 - 350, height/2 +85, 200, 200);
-        image(chickenimg[0], width/2 - 350, height/2 - 100, 200, 200);
-        image(chickenimg[tailindex], width/2 - 150, height/2 - 100, 200, 200);
-        image(chickenimg[combindex], width/2 - 330, height/2 -195, 200, 200);
-        image(chickenimg[wingindex], width/2 - 275, height/2 - 80, 200, 200);
+        image(chickenimg[feetindex], width/2 - 300, height/2 -  100, 200, 200);
+        image(chickenimg[0], width/2 - 300, height/2 - 100, 200, 200);
+        image(chickenimg[tailindex], width/2 - 300, height/2 - 100, 200, 200);
+        image(chickenimg[combindex], width/2 - 300, height/2 -100, 200, 200);
+        image(chickenimg[wingindex], width/2 - 300, height/2 - 100, 200, 200);
 
       pop();
     }
@@ -648,8 +689,8 @@ class Blobby extends PNGRoom {
       textLeading(26);
 
         //blob
-        image(blobimg[blob_bodyindex], width/2 - 300, height/2, 200, 200);
-        image(blobimg[blob_eyeindex], width/2 - 250, height/2+50, 100, 100);
+        image(blobimg[blob_bodyindex], width/2 - 300, height/2-100, 200, 200);
+        image(blobimg[blob_eyeindex], width/2 - 300, height/2-100, 200, 200);
 
       pop();
     }
@@ -732,15 +773,14 @@ class Cat extends PNGRoom {
       textLeading(26);
 
         //cat
-//        image(catimg[1], width/2 - 300, height/2, 200, 200);
-//        image(catimg[0], width/2 - 350, height/2-65, 200, 200);
-//        image(catimg[2], width/2 - 220, height/2-50, 200, 200);
-//        image(catimg[3], width/2 - 298, height/2+45, 200, 200);
-//        
-//        image(catimg[cat_eyeindex], width/2 - 350, height/2-50, 200, 200);
-//        image(catimg[cat_noseindex], width/2 - 350, height/2-40, 200, 200);
-//        image(catimg[cat_mouthindex], width/2 - 350, height/2-30, 200, 200);
-        placeCat(width/2-330, height/2-140);
+        image(catimg[0], width/2 - 300, height/2-100, 200, 200);
+        image(catimg[cat_earindex], width/2 - 300, height/2-100, 200, 200);
+        image(catimg[cat_tailindex], width/2 - 300, height/2-100, 200, 200);
+        image(catimg[cat_eyeindex], width/2 - 300, height/2-100, 200, 200);
+        image(catimg[cat_noseindex], width/2 - 300, height/2-100, 200, 200);
+        image(catimg[cat_mouthindex], width/2 - 300, height/2-100, 200, 200);
+        
+        //placeCat(width/2-330, height/2-140);
 
       pop();
     }
@@ -839,15 +879,12 @@ class Bunny extends PNGRoom {
       textSize(20);
       textLeading(26);
 
-        //cat
-        image(bunnyimg[3], width/2 - 293, height/2-8, 200, 200);
-        image(bunnyimg[0], width/2 - 350, height/2-65, 200, 200);
-        image(bunnyimg[1], width/2 - 331, height/2-152, 200, 200);
-        image(bunnyimg[2], width/2 - 345, height/2-5, 200, 200);
-        
-        image(bunnyimg[bunny_eyeindex], width/2 - 350, height/2-65, 200, 200);
-        image(bunnyimg[bunny_noseindex], width/2 - 350, height/2-65, 200, 200);
-        image(bunnyimg[bunny_mouthindex], width/2 - 350, height/2-65, 200, 200);
+        //bunny
+        image(bunnyimg[0], width/2 - 300, height/2-100, 200, 200);
+        image(bunnyimg[bunny_earindex], width/2 - 300, height/2-100, 200, 200);
+        image(bunnyimg[bunny_eyeindex], width/2 - 300, height/2-100, 200, 200);
+        image(bunnyimg[bunny_noseindex], width/2 - 300, height/2-100, 200, 200);
+        image(bunnyimg[bunny_mouthindex], width/2 - 300, height/2-100, 200, 200);
 
       pop();
     }
@@ -896,6 +933,100 @@ class PrintBunny extends PNGRoom {
         image(bunnyimg[bunny_eyeindex], 50, 65, 200, 200);
         image(bunnyimg[bunny_noseindex], 50, 75, 200, 200);
         image(bunnyimg[bunny_mouthindex], 50, 85, 200, 200);
+
+      pop();
+    }
+}
+
+class Dog extends PNGRoom {
+  // Constructor gets calle with the new keyword, when upon constructor for the adventure manager in preload()
+  constructor() {
+    super();    // call super-class constructor to initialize variables in PNGRoom
+  }
+
+  // call the PNGRoom superclass's draw function to draw the background image
+  // and draw our instructions on top of this
+    draw() {
+      // this calls PNGRoom.draw()
+      super.draw();
+      
+      push();
+
+      // title box
+      fill('#EFBDBD');
+      noStroke();
+      rect(width/2, 100, 900, 100, 10);
+
+      // title text
+      fill(255);
+      textAlign(CENTER);
+      textFont('Nunito');
+      textSize(60);
+
+      text("Customize your dog buddy!", width/2, 125);
+
+      // body text
+      fill(255);
+      textAlign(LEFT);
+      textFont('Nunito');
+      textSize(20);
+      textLeading(26);
+
+        //dog
+        image(dogimg[0], width/2 - 300, height/2-100, 200, 200);
+        image(dogimg[dog_earindex], width/2 - 300, height/2-100, 200, 200);
+        image(dogimg[dog_tailindex], width/2 - 300, height/2-100, 200, 200);
+        
+        image(dogimg[dog_eyeindex], width/2 - 300, height/2-100, 200, 200);
+        image(dogimg[dog_noseindex], width/2 - 300, height/2-100, 200, 200);
+        image(dogimg[dog_mouthindex], width/2 - 300, height/2-100, 200, 200);
+
+      pop();
+    }
+}
+
+class Human extends PNGRoom {
+  // Constructor gets calle with the new keyword, when upon constructor for the adventure manager in preload()
+  constructor() {
+    super();    // call super-class constructor to initialize variables in PNGRoom
+  }
+
+  // call the PNGRoom superclass's draw function to draw the background image
+  // and draw our instructions on top of this
+    draw() {
+      // this calls PNGRoom.draw()
+      super.draw();
+      
+      push();
+
+      // title box
+      fill('#EFBDBD');
+      noStroke();
+      rect(width/2, 100, 900, 100, 10);
+
+      // title text
+      fill(255);
+      textAlign(CENTER);
+      textFont('Nunito');
+      textSize(60);
+
+      text("Customize your human buddy!", width/2, 125);
+
+      // body text
+      fill(255);
+      textAlign(LEFT);
+      textFont('Nunito');
+      textSize(20);
+      textLeading(26);
+
+        //dog
+//        image(dogimg[0], width/2 - 300, height/2-100, 200, 200);
+//        image(dogimg[dog_earindex], width/2 - 300, height/2-100, 200, 200);
+//        image(dogimg[dog_tailindex], width/2 - 300, height/2-100, 200, 200);
+//        
+//        image(dogimg[dog_eyeindex], width/2 - 300, height/2-100, 200, 200);
+//        image(dogimg[dog_noseindex], width/2 - 300, height/2-100, 200, 200);
+//        image(dogimg[dog_mouthindex], width/2 - 300, height/2-100, 200, 200);
 
       pop();
     }
