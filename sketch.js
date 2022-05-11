@@ -127,6 +127,14 @@ function setup() {
 
   // setup the clickables = this will allocate the array
   clickables = clickablesManager.setup();
+    
+    resetButton = new Clickable();
+    
+    resetButton.onHover = clickableButtonHover;
+    resetButton.onOutside = clickableButtonOnOutside;
+    resetButton.onPress = reset_Canvas;
+    resetButton.resize(150, 65);
+    resetButton.text = "Reset";
 
   // this is optional but will manage turning visibility of buttons on/off
   // based on the state name in the clickableLayout
@@ -171,6 +179,8 @@ function draw() {
   
   // draw the p5.clickables, in front of the mazes but behind the sprites 
   clickablesManager.draw();
+    
+    resetButton.draw();
     
 //    circle(animateX + 100, animateY + 100,100);
 //    
@@ -722,17 +732,29 @@ class Cat extends PNGRoom {
       textLeading(26);
 
         //cat
-        image(catimg[1], width/2 - 300, height/2, 200, 200);
-        image(catimg[0], width/2 - 350, height/2-65, 200, 200);
-        image(catimg[2], width/2 - 220, height/2-50, 200, 200);
-        image(catimg[3], width/2 - 298, height/2+45, 200, 200);
-        
-        image(catimg[cat_eyeindex], width/2 - 350, height/2-50, 200, 200);
-        image(catimg[cat_noseindex], width/2 - 350, height/2-40, 200, 200);
-        image(catimg[cat_mouthindex], width/2 - 350, height/2-30, 200, 200);
+//        image(catimg[1], width/2 - 300, height/2, 200, 200);
+//        image(catimg[0], width/2 - 350, height/2-65, 200, 200);
+//        image(catimg[2], width/2 - 220, height/2-50, 200, 200);
+//        image(catimg[3], width/2 - 298, height/2+45, 200, 200);
+//        
+//        image(catimg[cat_eyeindex], width/2 - 350, height/2-50, 200, 200);
+//        image(catimg[cat_noseindex], width/2 - 350, height/2-40, 200, 200);
+//        image(catimg[cat_mouthindex], width/2 - 350, height/2-30, 200, 200);
+        placeCat(width/2-330, height/2-140);
 
       pop();
     }
+}
+
+function placeCat(x, y) {
+    image(catimg[1], 50+x, 65+y, 200, 200);
+    image(catimg[0], 0+x, 0+y, 200, 200);
+    image(catimg[2], 130+x, 15+y, 200, 200);
+    image(catimg[3], 51+x, 110+y, 200, 200);
+
+    image(catimg[cat_eyeindex], 0+x, 15+y, 200, 200);
+    image(catimg[cat_noseindex], 0+x, 25+y, 200, 200);
+    image(catimg[cat_mouthindex], 0+x, 35+y, 200, 200);
 }
 
 class PrintCat extends PNGRoom {
@@ -770,14 +792,14 @@ class PrintCat extends PNGRoom {
 //      textLeading(26);
 
         //cat
-        image(catimg[1], 100, 115, 200, 200);
-        image(catimg[0], 50, 50, 200, 200);
-        image(catimg[2], 180, 65, 200, 200);
-        image(catimg[3], 102, 160, 200, 200);
+        image(catimg[1], 50, 65, 200, 200);
+        image(catimg[0], 0, 0, 200, 200);
+        image(catimg[2], 130, 15, 200, 200);
+        image(catimg[3], 51, 110, 200, 200);
         
-        image(catimg[cat_eyeindex], 50, 65, 200, 200);
-        image(catimg[cat_noseindex], 50, 75, 200, 200);
-        image(catimg[cat_mouthindex], 50, 85, 200, 200);
+        image(catimg[cat_eyeindex], 0, 15, 200, 200);
+        image(catimg[cat_noseindex], 0, 25, 200, 200);
+        image(catimg[cat_mouthindex], 0, 35, 200, 200);
 
       pop();
     }
