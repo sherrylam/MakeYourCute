@@ -393,7 +393,7 @@ function save_Canvas() {
     let c = get(width/2-300,height/2-100, 300, 300);
     canvas.image(c, 0, 0);
     save(canvas, "img.png");
-    canvas.print();
+    //canvas.print();
 }
 printCanvas = function() {
     //this.visible = false;
