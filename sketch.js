@@ -465,12 +465,12 @@ class Splash extends PNGRoom {
       fill(255);
       textAlign(CENTER);
       textFont('Nunito');
-      textSize(60);
+      textSize(120);
 
       text('Make Your Cute', width/2 , height/2 + titleAnimation);
         titleAnimation+=speed;
         
-        if(titleAnimation >= 20 || titleAnimation <= -20){
+        if(titleAnimation >= 50 || titleAnimation <= -50){
             speed = -speed;
         }
       
