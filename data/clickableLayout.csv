@@ -23,14 +23,14 @@ ID,Name,State,PNGFilename,Text,x,y,visible
 21,Previous_Button_chicken_wing,Chicken,,<--,width/2+50,height/2+100,yes
 22,Next_Button_chicken_wing,Chicken,,-->,width/2+250,height/2+100,yes
 23,Back_chicken,Chicken,,Go Back,width/2-275,height/2-200,yes
-24,,,,,,,
-25,Save_Blob,Blob,,Save & Print,width/2-275,height/2+200,yes
-26,Previous_Button_blob_body,Blob,,<--,width/2+50,height/2-200,yes
-27,Next_Button_blob_body,Blob,,-->,width/2+250,height/2-200,yes
-28,Previous_Button_blob_eye,Blob,,<--,width/2+50,height/2-100,yes
-29,Next_Button_blob_eye,Blob,,-->,width/2+250,height/2-100,yes
-30,Back_blob,Blob,,Go Back,width/2-275,height/2-200,yes
-31,,,,,,,
+24,Save_Blob,Blob,,Save & Print,width/2-275,height/2+200,yes
+25,Previous_Button_blob_body,Blob,,<--,width/2+50,height/2-200,yes
+26,Next_Button_blob_body,Blob,,-->,width/2+250,height/2-200,yes
+27,Previous_Button_blob_eye,Blob,,<--,width/2+50,height/2-100,yes
+28,Next_Button_blob_eye,Blob,,-->,width/2+250,height/2-100,yes
+29,Previous_Button_blob_acc,Blob,,<--,width/2+50,height/2,yes
+30,Next_Button_blob_acc,Blob,,-->,width/2+250,height/2,yes
+31,Back_blob,Blob,,Go Back,width/2-275,height/2-200,yes
 32,Save_Cat,Cat,,Save & Print,width/2-275,height/2+200,yes
 33,Previous_Button_Cat_ear,Cat,,<--,width/2+50,height/2-200,yes
 34,Next_Button_Cat_ear,Cat,,-->,width/2+250,height/2-200,yes

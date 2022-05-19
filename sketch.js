@@ -48,6 +48,9 @@ var bunnyAssets = [];
 var dogimg = [];
 var dogAssets = [];
 
+//accessory
+var accessoryimg = [];
+
 //index
 var topindex = 0;
 var midindex = 0;
@@ -78,6 +81,8 @@ var dog_tailindex = 7;
 var dog_eyeindex = 13;
 var dog_noseindex = 19;
 var dog_mouthindex = 25;
+
+var accessoryindex = 0;
 
 var button;
 var button_hover;
@@ -125,6 +130,11 @@ function preload() {
     //dog assets
     for (var i = 1; i < 32; i++) {
         dogimg[i - 1] = loadImage('assets/dog-' + i + '.png');
+    }
+    
+    //accessory assets
+    for (var i = 0; i < 11; i++) {
+        accessoryimg[i] = loadImage('assets/accessory-' + i + '.png');
     }
 
 
@@ -343,12 +353,14 @@ function setupClickables() {
     clickables[22].onPress = subtractWingIndex;
     clickables[23].onPress = clickableButtonPressed;
 
-    clickables[25].onPress = save_Canvas;
-    clickables[26].onPress = subtractBlobIndex;
-    clickables[27].onPress = addBlobIndex;
-    clickables[28].onPress = subtractBlobEyeIndex;
-    clickables[29].onPress = addBlobEyeIndex;
-    clickables[30].onPress = clickableButtonPressed;
+    clickables[24].onPress = save_Canvas;
+    clickables[25].onPress = subtractBlobIndex;
+    clickables[26].onPress = addBlobIndex;
+    clickables[27].onPress = subtractBlobEyeIndex;
+    clickables[28].onPress = addBlobEyeIndex;
+    clickables[29].onPress = subtractBlobAccIndex;
+    clickables[30].onPress = addBlobAccIndex;
+    clickables[31].onPress = clickableButtonPressed;
 
     clickables[32].onPress = save_Canvas;
     clickables[33].onPress = subtractCatEarIndex;
@@ -723,6 +735,7 @@ class Blobby extends PNGRoom {
         //blob
         image(blobimg[blob_bodyindex], width / 2 - 300, height / 2 - 100, 200, 200);
         image(blobimg[blob_eyeindex], width / 2 - 300, height / 2 - 100, 200, 200);
+        image(accessoryimg[accessoryindex], width / 2 - 300, height / 2 - 100, 200, 200);
 
         pop();
     }

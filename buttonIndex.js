@@ -115,6 +115,22 @@ subtractBlobEyeIndex = function() {
         blob_eyeindex = 17;
     }
 }
+addBlobAccIndex = function() {
+    if (accessoryindex <= 11){
+        accessoryindex++;
+    }
+    if (accessoryindex > 11){
+        accessoryindex = 0;
+    }
+}
+subtractBlobAccIndex = function() {
+    if (accessoryindex >= 0){
+        accessoryindex--;
+    }
+    if (accessoryindex < 0){
+        accessoryindex = 11;
+    }
+}
 
 //CAT
 addCatEarIndex = function() {
