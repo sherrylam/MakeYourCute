@@ -116,10 +116,10 @@ subtractBlobEyeIndex = function() {
     }
 }
 addBlobAccIndex = function() {
-    if (accessoryindex <= 11){
+    if (accessoryindex <= 10){
         accessoryindex++;
     }
-    if (accessoryindex > 11){
+    if (accessoryindex > 10){
         accessoryindex = 0;
     }
 }
@@ -128,7 +128,7 @@ subtractBlobAccIndex = function() {
         accessoryindex--;
     }
     if (accessoryindex < 0){
-        accessoryindex = 11;
+        accessoryindex = 10;
     }
 }
 
